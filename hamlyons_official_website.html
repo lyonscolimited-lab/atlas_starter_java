@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hamlyons Group</title>
+  <style>
+    body { margin: 0; font-family: Arial, Helvetica, sans-serif; background: #0f172a; color: #e5e7eb; }
+    header { background: linear-gradient(135deg, #0ea5e9, #2563eb); padding: 20px; text-align: center; }
+    header h1 { margin: 0; font-size: 2.5rem; letter-spacing: 2px; }
+    nav { display: flex; justify-content: center; gap: 20px; background: #020617; padding: 10px; }
+    nav a { color: #e5e7eb; text-decoration: none; font-weight: bold; }
+    nav a:hover { color: #38bdf8; }
+    .hero { padding: 60px 20px; text-align: center; }
+    .hero h2 { font-size: 2rem; margin-bottom: 10px; }
+    .sections { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; padding: 40px 20px; }
+    .card { background: #020617; border-radius: 12px; padding: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.4); }
+    .card h3 { color: #38bdf8; margin-top: 0; }
+    footer { background: #020617; text-align: center; padding: 15px; font-size: 0.9rem; color: #9ca3af; }
+    input, textarea, button { padding: 10px; margin: 5px 0; border-radius: 6px; border: none; width: 200px; }
+    button { background: #38bdf8; color: #020617; cursor: pointer; font-weight: bold; }
+    button:hover { background: #0ea5e9; }
+  </style>
+</head>
+<body>
+
+  <!-- Login Choice at the very top -->
+  <section class="hero" id="login-choice" style="background:#020617;padding:40px;">
+    <h2>Welcome! Please choose your login</h2>
+    <button onclick="showAdminLogin()">Login as Admin</button>
+    <button onclick="showUserLogin()">Login as User</button>
+    <button onclick="showUserSignUp()">Sign Up as User</button>
+  </section>
+
+  <!-- Admin Login -->
+  <section class="hero" id="admin-login" style="display:none;">
+    <h2>Admin Login</h2>
+      <label for="adminUser"></label><input id="adminUser" placeholder="Admin username" />
+      <label for="adminPass"></label><input id="adminPass" type="password" placeholder="Admin password" />
+    <br><br>
+    <button onclick="adminLogin()">Login</button>
+    <p id="adminMsg"></p>
+  </section>
+
+  <!-- User Login -->
+  <section class="hero" id="user-login" style="display:none;">
+    <h2>User Login</h2>
+      <label for="userName"></label><input id="userName" placeholder="Username" />
+      <label for="userPass"></label><input id="userPass" type="password" placeholder="Password" />
+    <br><br>
+    <button onclick="userLogin()">Login</button>
+    <p id="userMsg"></p>
+  </section>
+
+  <!-- User Sign Up -->
+  <section class="hero" id="user-signup" style="display:none;">
+    <h2>User Sign Up</h2>
+      <label for="newUserName"></label><input id="newUserName" placeholder="Username" />
+      <label for="newUserEmail"></label><input id="newUserEmail" placeholder="Email" />
+      <label for="newUserPass"></label><input id="newUserPass" type="password" placeholder="Password" />
+    <br><br>
+    <button onclick="userSignUp()">Sign Up</button>
+    <p id="signUpMsg"></p>
+  </section>
+
+  <header>
+    <h1>HAMLYONS GROUP</h1>
+    <p>Innovation • Entertainment • Investment • Gaming • Media</p>
+  </header>
+
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#services">Services</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <section class="hero" id="home">
+    <h2>Welcome to Hamlyons Group</h2>
+    <p>A warm, welcoming environment built for everyone. Access all services and products you need to prosper and grow easily.</p>
+  </section>
+
+  <section class="sections" id="services">
+    <div class="card">
+      <h3>🎬 Entertainment</h3>
+      <p>Music, movies, events, content creation, and digital entertainment solutions.</p>
+    </div>
+    <div class="card">
+      <h3>🛍️ Shopping</h3>
+      <p>Easy access to products, digital goods, gaming items, and online services.</p>
+    </div>
+    <div class="card">
+      <h3>🛠️ Services</h3>
+      <p>Creative, technical, business, and investment services designed to help you prosper.</p>
+    </div>
+  </section>
+
+  <section class="hero" id="about">
+    <h2>About Us</h2>
+    <p>Hamlyons Group connects creativity, technology, and opportunity under one powerful brand.</p>
+  </section>
+
+  <section class="hero" id="contact">
+    <h2>Contact Us</h2>
+    <p>Email: lyonscolimited@gmail.com</p>
+    <p>Phone (UAE): <a href="tel:+971569079502">+971 56 907 9502</a></p>
+    <p>Phone (Kenya): <a href="tel:+254703194000">+254 703 194 000</a></p>
+    <p>Location: UAE • Kenya • Global</p>
+  </section>
+
+  <footer>
+    <p>© 2026 Hamlyons Group. All Rights Reserved.</p>
+  </footer>
+
+  <script>
+    const ADMIN_NAME = "hamlyons";
+    const ADMIN_PASSWORD = "hamlyons123";
+    let users = [];
+
+    function showAdminLogin() { document.getElementById('login-choice').style.display = 'none'; document.getElementById('admin-login').style.display = 'block'; }
+    function showUserLogin() { document.getElementById('login-choice').style.display = 'none'; document.getElementById('user-login').style.display = 'block'; }
+    function showUserSignUp() { document.getElementById('login-choice').style.display = 'none'; document.getElementById('user-signup').style.display = 'block'; }
+
+    function adminLogin() {
+      const u = document.getElementById('adminUser').value;
+      const p = document.getElementById('adminPass').value;
+      if (u === ADMIN_NAME && p === ADMIN_PASSWORD) {
+        document.getElementById('admin-login').style.display = 'none';
+        document.getElementById('product-admin').style.display = 'grid';
+      } else { document.getElementById('adminMsg').innerText = 'Access denied'; }
+    }
+
+    function userSignUp() {
+      const u = document.getElementById('newUserName').value;
+      const e = document.getElementById('newUserEmail').value;
+      const p = document.getElementById('newUserPass').value;
+      if (!u || !e || !p) { document.getElementById('signUpMsg').innerText = 'All fields are required'; return; }
+      users.push({username:u, email:e, password:p});
+      document.getElementById('signUpMsg').innerText = 'Sign up successful! You can now login.';
+      document.getElementById('newUserName').value=''; document.getElementById('newUserEmail').value=''; document.getElementById('newUserPass').value='';
+    }
+
+    function userLogin() {
+      const u = document.getElementById('userName').value;
+      const p = document.getElementById('userPass').value;
+      const user = users.find(x => x.username===u && x.password===p);
+      if (user) {
+        document.getElementById('user-login').style.display='none';
+        alert('Welcome ' + u + '! You can now view products.');
+      } else { document.getElementById('userMsg').innerText='Invalid username or password'; }
+    }
+  </script>
+
+</body>
+</html>
